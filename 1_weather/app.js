@@ -6,18 +6,18 @@ const location = process.argv[2]
 if (!location) {
     console.log('Please provide a valid location!')
 } else {
-    geocode(location, (error, geoData) => {
+    geocode(location, (error, { latitude, longitude, placeName } = {}) => {
         if (error) {
             return console.log(error)
         }
 
-        forecast(geoData.latitude, geoData.longitude, (error, forecastData) => {
+        forecast(latitude, longitude, (error, forecastData) => {
             if (error) {
                 return console.log(error)
             }
 
-            console.log(geoData.placeName)
+            console.log(placeName)
             console.log(forecastData)
         })
-    })  
+    })
 }
