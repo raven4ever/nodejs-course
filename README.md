@@ -1,1 +1,1 @@
-Some random text.
+Apps from the `The Complete Node.js Developer Course (3rd Edition)` Udemy course
