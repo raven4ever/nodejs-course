@@ -32,4 +32,14 @@ node app.js "long location"
 
 An `express` application which will interogate the [weatherstack](weatherstack.com/) and [mapbox](mapbox.com) APIs. The location is provided by the user using a HTML form.
 
-The application is accesible at the following [URL](localhost:3000)
+The application is accesible at the following [URL](localhost:3000).
+
+To start the application execute:
+
+```shell
+# development environment
+npm run dev
+
+# production
+npm run start
+```
