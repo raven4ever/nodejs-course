@@ -1,4 +1,5 @@
 const path = require('path')
+const hbs = require('hbs')
 const express = require('express')
 
 const app = express()
@@ -7,27 +8,37 @@ const app = express()
 const publicDir = path.join(__dirname, '../public')
 app.use(express.static(publicDir))
 
-// set templating engine
+// custom views path
+const viewsDir = path.join(__dirname, '../templates/views')
+app.set('views', viewsDir)
+
+// custom partial HBS templates (HTML header, footer etc.)
+const partialsDir = path.join(__dirname, '../templates/partials')
+hbs.registerPartials(partialsDir)
+
+// set templating engine to HBS
 app.set('view engine', 'hbs')
 
 // routes
 app.get('/', (req, res) => {
     res.render('index', {
         title: 'Weather App',
-        name: 'Adrian'
+        createdByName: 'Adrian'
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About HBS',
-        name: 'Adrian'
+        createdByName: 'Adrian'
     })
 })
 
 app.get('/help', (req, res) => {
     res.render('help', {
-        message: 'Helpful text!'
+        message: 'Helpful text!',
+        title: 'Help',
+        createdByName: 'Adrian'
     })
 })
 
@@ -35,6 +46,23 @@ app.get('/weather', (req, res) => {
     res.send({
         forecast: 'forecast',
         location: 'location'
+    })
+})
+
+// 404 pages
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: 'Error!',
+        createdByName: 'Adrian',
+        errorMessage: 'Help article not found!'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: 'Error!',
+        createdByName: 'Adrian',
+        errorMessage: 'Page not found!'
     })
 })
 
