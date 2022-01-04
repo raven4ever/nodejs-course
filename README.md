@@ -25,6 +25,7 @@ Supported commands:
 
 ```shell
 node app.js location
+node app.js "long location"
 ```
 
 ## [Server Weather Application](./2_webserver_weather)
