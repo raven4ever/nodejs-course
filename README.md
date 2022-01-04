@@ -19,7 +19,7 @@ node app.js remove --title="Note Title"
 
 A CLI application which will return the weather forecast
 
-The application uses the APIs from [weatherstack](weatherstack.com/) and [mapbox](mapbox.com) so API keys are required for each service.
+The application uses the APIs from [weatherstack](weatherstack.com) and [mapbox](mapbox.com) so API keys are required for each service.
 
 Supported commands:
 
@@ -30,7 +30,7 @@ node app.js "long location"
 
 ## [Server Weather Application](./2_webserver_weather)
 
-An `express` application which will interogate the [weatherstack](weatherstack.com/) and [mapbox](mapbox.com) APIs. The location is provided by the user using a HTML form.
+An `express` application which will interogate the [weatherstack](weatherstack.com) and [mapbox](mapbox.com) APIs. The location is provided by the user using a HTML form.
 
 The application is accesible at the following [URL](localhost:3000).
 
