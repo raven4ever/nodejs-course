@@ -43,6 +43,42 @@ app.get('/users/:id', async (req, res) => {
     }
 })
 
+app.patch('/users/:id', async (req, res) => {
+    const incomingUpdates = Object.keys(req.body)
+    const allowedUpdates = ['name', 'email', 'age']
+    const isValidUpdate = incomingUpdates.every((updateKey) => allowedUpdates.includes(updateKey))
+
+    if (!isValidUpdate) {
+        return res.status(400).send({ error: 'Invalid update fields!' })
+    }
+
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+
+        if (!user) {
+            return res.status(404).send()
+        }
+
+        res.send(user)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
+app.delete('/users/:id', async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id)
+
+        if (!user) {
+            return res.status(404).send()
+        }
+
+        res.send(user)
+    } catch (error) {
+        res.status(500).send()
+    }
+})
+
 app.post('/tasks', async (req, res) => {
     const tsk = new Task(req.body)
 
@@ -66,6 +102,42 @@ app.get('/tasks', async (req, res) => {
 app.get('/tasks/:id', async (req, res) => {
     try {
         const task = await Task.findById(req.params.id)
+
+        if (!task) {
+            return res.status(404).send()
+        }
+
+        res.send(task)
+    } catch (error) {
+        res.status(500).send()
+    }
+})
+
+app.patch('/tasks/:id', async (req, res) => {
+    const incomingUpdates = Object.keys(req.body)
+    const allowedUpdates = ['description', 'completed']
+    const isValidUpdate = incomingUpdates.every((updateKey) => allowedUpdates.includes(updateKey))
+
+    if (!isValidUpdate) {
+        return res.status(400).send({ error: 'Invalid update fields!' })
+    }
+
+    try {
+        const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+
+        if (!task) {
+            return res.status(404).send()
+        }
+
+        res.send(task)
+    } catch (error) {
+        res.status(400).send()
+    }
+})
+
+app.delete('/tasks/:id', async (req, res) => {
+    try {
+        const task = await Task.findByIdAndDelete(req.params.id)
 
         if (!task) {
             return res.status(404).send()
