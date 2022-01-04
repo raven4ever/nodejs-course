@@ -1,4 +1,4 @@
-# Apps from [The Complete Node.js Developer Course (3rd Edition)](https://www.udemy.com/course/the-complete-nodejs-developer-course-2/)
+# Apps from the [The Complete Node.js Developer Course](https://www.udemy.com/course/the-complete-nodejs-developer-course-2/) course
 
 ## [Notes Application](./0_notes)
 
