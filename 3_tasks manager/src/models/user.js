@@ -76,7 +76,7 @@ userSchema.methods.toJSON = function () {
 // register an instance function to generate the JWT auth token
 userSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, 'SuperDuperUberSecret', { expiresIn: '1 day' })
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: '1 day' })
     user.tokens = user.tokens.concat({ token })
     await user.save()
     return token

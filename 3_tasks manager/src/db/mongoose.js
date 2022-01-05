@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017', {
-    user: 'root',
-    pass: 'examplepassword',
-    dbName: 'task-manager-api'
+mongoose.connect(process.env.MONGO_URL, {
+    user: process.env.MONGO_USR,
+    pass: process.env.MONGO_PASS,
+    dbName: process.env.MONGO_DB
 })

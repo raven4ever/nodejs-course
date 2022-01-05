@@ -37,6 +37,67 @@ The application is accesible at the following [URL](localhost:3000).
 To start the application execute:
 
 ```shell
+# install dependencies
+npm install
+
+# development environment
+npm run dev
+
+# production
+npm run start
+```
+
+## [Tasks Manager Application](./3_tasks manager)
+
+An `express` application which exposes API endpoints to create, read and update users and tasks.
+
+The following API endpoints are available:
+
+- /users
+  - / [POST]
+  - /login [POST]
+  - /logout [POST]
+  - /logoutAll [POST]
+  - /me
+    - /[GET]
+    - / [DELETE]
+    - / [PATCH]
+    - /avatar [POST]
+    - /avatar [DELETE]
+    - /avatar [GET]
+
+- /tasks
+  - / [POST]
+  - / [GET]
+  - / [DELETE]
+  - / [PATCH]
+
+A `Postman` collection is available [here](./3_tasks manager/postman/task-manager-api.postman_collection.json) to test the endpoints.
+
+The application needs a `.env` file in its root directory with the following structure:
+
+```properties
+PORT=3000
+
+SENDGRID_FROM_EMAIL=
+SENDGRID_API_KEY=
+
+JWT_SECRET=SuperDuperUberSecret
+
+MONGO_URL=mongodb://localhost:27017
+MONGO_USR=root
+MONGO_PASS=examplepassword
+MONGO_DB=task-manager-api
+```
+
+The application uses SendGrid to send emails when a new user is added or deleted. This is why a SendGrid API key is required. If the SendGrid API key is not set or empty in the `.env` file, the application won't attempt to send any emails, it will print a message in the console.
+
+To start the application execute:
+
+```shell
+# install dependencies
+npm install
+
 # development environment
 npm run dev
 
