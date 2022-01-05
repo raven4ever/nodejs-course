@@ -10,6 +10,7 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 
+// add custom routers
 app.use(userRouter)
 app.use(taskRouter)
 
