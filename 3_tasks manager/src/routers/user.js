@@ -38,7 +38,7 @@ router.get('/users/:id', async (req, res) => {
 
 router.patch('/users/:id', async (req, res) => {
     const incomingUpdates = Object.keys(req.body)
-    const allowedUpdates = ['name', 'email', 'age']
+    const allowedUpdates = ['name', 'email', 'age', 'password']
     const isValidUpdate = incomingUpdates.every((updateKey) => allowedUpdates.includes(updateKey))
 
     if (!isValidUpdate) {
@@ -46,7 +46,12 @@ router.patch('/users/:id', async (req, res) => {
     }
 
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        // const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+
+        // method to run the mongoose middleware
+        const user = await User.findById(req.params.id)
+        incomingUpdates.forEach((update) => user[update] = req.body[update])
+        await user.save()
 
         if (!user) {
             return res.status(404).send()
