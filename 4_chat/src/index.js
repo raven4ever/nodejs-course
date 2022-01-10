@@ -29,11 +29,15 @@ io.on('connection', (socket) => {
         socket.join(user.room)
 
         // send to current client
-        socket.emit('message', generateMessage('Admin','Welcome to the chat app!'))
+        socket.emit('message', generateMessage('Admin', 'Welcome to the chat app!'))
 
         // send to all but the current client
         socket.broadcast.to(user.room).emit('message', generateMessage('Admin', `${user.username} has joined!`))
 
+        io.to(user.room).emit('roomData', {
+            room: user.room,
+            users: getUsersInRoom(user.room)
+        })
         callback()
     })
 
@@ -65,6 +69,11 @@ io.on('connection', (socket) => {
         if (user) {
             // send to all clients
             io.to(user.room).emit('message', generateMessage('Admin', `${user.username} has left!`))
+
+            io.to(user.room).emit('roomData', {
+                room: user.room,
+                users: getUsersInRoom(user.room)
+            })
         }
     })
 })
