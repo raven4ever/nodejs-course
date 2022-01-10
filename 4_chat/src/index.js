@@ -13,19 +13,13 @@ const port = process.env.PORT || 3000
 const publicDir = path.join(__dirname, '../public')
 app.use(express.static(publicDir))
 
-let count = 0
-
 io.on('connection', (socket) => {
-    console.log('New user connected')
+    console.log('New user connected...')
 
-    socket.emit('countUpdated', count)
+    socket.emit('message', 'Welcome!')
 
-    socket.on('increment', () => {
-        count++
-        // emits to a single client
-        // socket.emit('countUpdated', count)
-        // emit to all connections
-        io.emit('countUpdated', count)
+    socket.on('sendMessage', (message) => {
+        io.emit('message', message)
     })
 })
 
