@@ -8,9 +8,9 @@ const $sendLocationButton = document.querySelector('#send-location')
 const $messages = document.querySelector('#messages')
 
 // templates
-const $messageTemplate = document.querySelector('#message-template').innerHTML
-const $locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
-const $sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
+const messageTemplate = document.querySelector('#message-template').innerHTML
+const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
+const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 
 // options
 const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
@@ -40,7 +40,7 @@ const autoscroll = () => {
 
 socket.on('message', (message) => {
     console.log(message)
-    const html = Mustache.render($messageTemplate, {
+    const html = Mustache.render(messageTemplate, {
         message: message.text,
         username: message.username,
         createdAt: moment(message.createdAt).format('HH:mm:ss')
@@ -53,7 +53,7 @@ socket.on('message', (message) => {
 
 socket.on('locationMessage', (message) => {
     console.log(message)
-    const html = Mustache.render($locationMessageTemplate, {
+    const html = Mustache.render(locationMessageTemplate, {
         url: message.url,
         username: message.username,
         createdAt: moment(message.createdAt).format('HH:mm:ss')
